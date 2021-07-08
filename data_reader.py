@@ -1,9 +1,9 @@
 import pandas as pd
 
 
-class Co2Concentration:
-    def __init__(self):
-        self.df = pd.read_csv("data_files/co2-concentration-long-term.csv")
+class DataReader:
+    def __init__(self, csv_file_path: str):
+        self.df = pd.read_csv(csv_file_path)
 
     def full_dataframe(self) -> pd. DataFrame:
         return self.df
@@ -17,3 +17,9 @@ class Co2Concentration:
             return self.df.loc[self.df["Year"] <= end_year]
         else:  # not start_year and not end_year
             return pd.DataFrame()
+
+
+class Co2Concentration(DataReader):
+    def __init__(self):
+        csv_file_path = "data_files/co2-concentration-long-term.csv"
+        super().__init__(csv_file_path)
